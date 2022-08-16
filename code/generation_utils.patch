@@ -1,0 +1,10 @@
+--- generation_utils.py	2022-08-02 15:30:20.869519058 +0200
++++ generation_utils_msc42.py	2022-08-02 15:30:20.869519058 +0200
+@@ -1159,6 +1159,7 @@
+ 
+         # 4. Prepare `input_ids` which will be used for auto-regressive generation
+         if self.config.is_encoder_decoder:
++            model_kwargs['source_ids'] = inputs # added by msc42
+             input_ids = self._prepare_decoder_input_ids_for_generation(
+                 batch_size,
+                 decoder_start_token_id=decoder_start_token_id,

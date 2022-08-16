@@ -1,0 +1,444 @@
+yes | apple, | please put this apple into the bowl
+yes | apple, | be so kind and slice that fruit for me, please
+yes | backpack, | put this thing where it belongs
+yes | backpack, | pack a bottle of water into it
+yes | banana, | can you please cut this banana into small pieces?
+yes | banana, | please fry this one
+yes | banana, | I'm not hungry, so please take this to the fridge
+yes | banana, | peel that banana for me, please
+yes | book, | move that book to the shelf, please
+yes | book, | I hate that book, just throw it away
+yes | book, | open page 42 of this book
+yes | book, | can you look through that to find some recipe with noodles?
+yes | book, | can you give me this?
+yes | book, | give me that book, please
+yes | book, | I want to have this book!
+yes | book, | can you wrap that with wrapping paper so that I can gift it to my friend?
+yes | bottle, | pour this into the cup, please
+yes | bottle, | shake that bottle, please
+yes | bottle, | put this into the fridge
+yes | bottle, | I'm thirsty, give me this!
+yes | bottle, | would you be so kind and bring this bottle to room 42?
+yes | bottle, | water the flowers with this, please
+yes | bowl, | i told you yesterday to throw this bowl away
+yes | bowl, | please pour some milk into here
+yes | bowl, | put that bowl into the shelf
+yes | bowl, | just flip that bowl upside down
+yes | bowl, | move this bowl away
+yes | bowl, | serve the food inside this bowl, please
+yes | bowl, | bring this to my friend
+yes | bowl, | place this in the shelf
+yes | bowl, | please put some milk into that
+yes | bowl, | could you put this away?
+yes | bowl, | can you move this bowl away?
+yes | bowl, | quickly wash it, please
+yes | bowl, | clean up that bowl
+yes | bowl, | insert some cereals in here, please
+yes | bowl, | put that bowl away, please
+yes | bowl, | move that bowl to the cupboard, please
+yes | bowl, | this bowl must be thrown away
+yes | bowl, | fill it with water!
+yes | bowl, | can you fill some soup into that bowl?
+yes | bowl, | discard the remaining liquid out of this bowl.
+yes | bowl, | please hand me that bowl
+yes | bowl, | bring it next door
+yes | bowl, | put this into the dishwasher, please
+yes | bowl, | will you please put that into the microwave?
+yes | bowl, | tidy this up
+yes | bowl, | put it into the sink
+yes | bowl, | put some cereal into this bowl
+yes | bowl, | how about moving this to the fridge?
+yes | bowl, | move this somewhere else
+yes | bowl, | please sponge this thoroughly again
+yes | broccoli, | I'm hungry, please cook that!
+yes | broccoli, | slice that into coarse chunks
+yes | carrot, | cut that stuff into very fine slices
+yes | carrot, | let them simmer for around 15 minutes
+yes | carrot, | put these into the fridge again, please
+yes | carrot, | slice this carrot as fine as possible
+yes | cell phone, | Could you be so kind and move this cellphone to the charging station.
+yes | cell phone, | mute that, please
+yes | cell phone, | Hope you can dry this smartphone.
+yes | cell phone, | dont forget to charge this phone
+yes | cup, | put some tea into this, please
+yes | cup, | put that back into the shelf
+yes | keyboard, | can you please clean this up?
+yes | keyboard, | lift this so that I can look underneath
+yes | keyboard, | bring this to my colleague, please
+yes | keyboard, | turn the keyboard on
+yes | keyboard, | put this into the storage room
+yes | keyboard, | wrap this with plastic foil
+yes | laptop, | can you shut that down?
+yes | laptop, | switch it on, please
+yes | laptop, | please give me this
+yes | laptop, | can you remove the dust from it?
+yes | laptop, | bring this to my boss
+yes | laptop, | move this to the right
+yes | microwave, | put the carrots into this
+yes | microwave, | it's broken, please get rid of it
+yes | microwave, | can you turn that on?
+yes | microwave, | is there somthing inside?
+yes | microwave, | please turn that off
+yes | microwave, | clean it up, please
+yes | oven, | Please turn on this oven.
+yes | oven, | it's smelling, turn it off immediately!
+yes | oven, | That oven need to be turned on.
+yes | oven, | bake a cake inside this oven
+yes | refrigerator, | tell me what is inside this?
+yes | refrigerator, | shut it off
+yes | refrigerator, | open this, please
+yes | refrigerator, | place the beverages inside that
+yes | refrigerator, | store the food inside this here
+yes | refrigerator, | empty this fridge
+yes | scissors, | use that to cut the paper
+yes | scissors, | please sharpen that scissors
+yes | sink, | Please make this sink clean.
+yes | sink, | put the bowl over here
+yes | tv, | The Super Bowl is starting soon, turn it on.
+yes | tv, | it's annoying me, switch it off, please
+yes | tv, | Please raise this TV that I can better watch.
+yes | tv, | play some movie on that tv
+yes | tv, | Could you measure this TV size for me?
+yes | tv, | can you help me move this upstairs?
+no | , | can you please refill my water bottle
+no | , | I'm ready to go, can you unplug my laptop?
+no | , | bring me an apple from the kitchen, please
+no | , | kind of hot in here, open up the window!
+no | , | why don't you clean the bathroom while I do my work
+no | , | see, something with my chair is not right, can you check it?
+no | , | I'm starving, can you prepare a salad for me?
+no | , | can you bring me a coke, please?
+no | , | could you please move the fan to the basement?
+no | , | please turn on my computer
+no | , | can you grab a banana from the fridge?
+no | , | what's inside the dishwasher?
+no | , | please put some water into my glass
+no | , | please bring me a plate
+no | , | I'm finished, you can now empty the table
+no | , | the apple is bad, can you discard it for me?
+no | , | please close all the windows
+no | , | I think you should clean the table
+no | , | could you please fill some milk into the blue bowl?
+no | , | I'm still waiting for my food, did you turn on the microwave?
+yes | apple, | Wash this apple please.
+yes | apple, | please move small tv to the leftside
+yes | apple, | I want to eat this apple, please peel it.
+yes | apple, | give me the apple behind the bottle
+yes | apple, | Serve this.
+yes | apple, | cut this to the pieces
+yes | apple, | Check this object for me.
+yes | apple, | I don't want to eat this, put it to the refrigerator
+yes | apple, | Cut the apple in some small pieces.
+yes | apple, | bring two of these to me inside of a bowl
+yes | banana, | Half that object I’m pointing to.
+yes | banana, | put this inside of the bowl
+yes | banana, | Cut this banana.
+yes | banana, | serve the banana inside of this plate, please
+yes | bottle, | Please open this bottle for me.
+yes | bottle, | please pour some milk from this
+yes | bottle, | Throw away that.
+yes | bottle, | move the bottle from table to counter
+yes | bowl, | Wash that bowl that I can use it again.
+yes | bowl, | put some cereal inside of this
+yes | cake, | Unwrap this cake.
+yes | cake, | cut this to eight pieces
+yes | cake, | Eat it, my loved robot
+yes | cake, | please help me bake  the cake
+yes | cake, | Sprinkle that object with sugar.
+yes | cake, | please help me to prepare this
+yes | cake, | Cut this cake in same sized pieces.
+yes | cake, | bring remaining cake to me with a fork
+yes | cake, | Would it possible to finish that?
+yes | cake, | please hold this for me for one minute
+yes | cake, | Please prepare this cake for our dinner.
+yes | cake, | add some chocolate sauce on top of the cake 
+yes | chair, | Clean this dirty chair quickly, I want to sit.
+yes | chair, | move this chair a bit front please
+yes | chair, | Please bring that.
+yes | chair, | rotate this from right to left
+yes | chair, | Fold this chair that I can take it.
+yes | chair, | tell me the color of pillow which located on the chair
+yes | cup, | I beg you, please fill this cup with coffee.
+yes | cup, | select one of these red cups
+yes | cup, | You need to fill that with tea.
+yes | cup, | robot please wash this in the sink
+yes | fork, | Wash that fork with water and fluid.
+yes | fork, | serve salat with a fork please
+yes | fork, | Choose the object I’m pointing to.
+yes | fork, | tell me the location of the fork
+yes | keyboard, | Robot, clean this keyboard please.
+yes | keyboard, | robot, press a button on the keyboard
+yes | keyboard, | Use this.
+yes | keyboard, | please swap this with new keyboard
+yes | keyboard, | Could you hold that keyboard for me?
+yes | keyboard, | press enter key on this
+yes | keyboard, | Check that please.
+yes | keyboard, | measure the keyboard for me please
+yes | keyboard, | Dispose this old keyboard.
+yes | keyboard, | robot, would you uncover keyboard under the book
+yes | knife, | Use this to cut the pizza.
+yes | knife, | can you use this to cut the banana 
+yes | knife, | Clean this used knife.
+yes | knife, | can you take knife out of the child's front
+yes | microwave, | Open this microwave.
+yes | microwave, | could you please clean this before evening
+yes | microwave, | Empty this object.
+yes | microwave, | could you please open the microware for me
+yes | mouse, | Can you clean this mouse.
+yes | mouse, | roll the scroll button on the mouse
+yes | mouse, | Dry this, it’s wet.
+yes | mouse, | mark this for me
+yes | mouse, | Open the mouse.
+yes | mouse, | can you remove this from the laptop
+yes | mouse, | Wrap this mouse in gift paper.
+yes | mouse, | take this with you
+yes | mouse, | Add that object to the computer stuff.
+yes | mouse, | can you swap mouse and keyboard on the table
+yes | laptop, | Open it fast please.
+yes | laptop, | Robot please look-behind this to find my keys 
+yes | laptop, | Turn on that laptop.
+yes | laptop, | Robot, can you turn-off the laptop please
+yes | laptop, | Disassemble that laptop.
+yes | laptop, | would you adjust the setting in the laptop
+yes | laptop, | Open it.
+yes | laptop, | I need you to hold this for me
+yes | laptop, | Close it.
+yes | laptop, | please turn laptop from left to right
+yes | refrigerator, | Open the refrigerator I’m pointing to.
+yes | refrigerator, | put this bowl into the refrigerator
+yes | refrigerator, | Clean this, it’s a mess.
+yes | refrigerator, | brush this please
+yes | scissors, | Bring me the scissors.
+yes | scissors, | cut the paper with this
+yes | sink, | Please wash this sink clean.
+yes | sink, | please emtpy this
+yes | spoon, | Try to break this spoon.
+yes | spoon, | mix salad with this spoon
+yes | spoon, | Empty this spoon.
+yes | spoon, | bring me the spoon near the ice cream 
+yes | spoon, | Choose this.
+yes | spoon, | move this from table to cutlery drawer
+yes | spoon, | Clean this spoon.
+yes | spoon, | put this into the sink, please
+yes | umbrella, | Dry this umbrella.
+yes | umbrella, | can you please put this into the wardrobe?
+yes | umbrella, | Carry this umbrella.
+yes | umbrella, | give me that umbrella, please
+yes | umbrella, | Bring the object I’m pointing to.
+yes | umbrella, | can you bring that umbrella into the bathroom?
+yes | umbrella, | Hold this umbrella for me.
+yes | umbrella, | this one has a hole, just throw it away
+yes | umbrella, | Put it in its cover.
+yes | umbrella, | please hang up this umbrella
+yes | umbrella, | Wash this umbrella that I used.
+yes | umbrella, | can you bring that to my colleague in room 247?
+yes | umbrella, | Open that umbrella.
+yes | umbrella, | remove the cover from this
+no | , | I'm so thirsty, bring me a bottle.
+no | , | Dry the towel quickly.
+no | , | I need like every morning my cup.
+no | , | Adjust the towel rail please.
+no | , | Wash my dish, I finished breakfast.
+no | , | Could you attach the poster to the wall.
+no | , | Unscrew the screw on my laptop.
+no | , | Please uncover the pot.
+no | , | Hold my mouse for me.
+no | , | Season the meal that you cooked.
+no | , | Unlock my laptop.
+no | , | Empty the bottle if it possible.
+no | , | Search another keyboard for me.
+no | , | Press the bottle please.
+no | , | Search a new mouse.
+no | , | Throw away that mouse.
+no | , | Lock my laptop.
+no | , | It would wounderful if you could peel the pear.
+no | , | I guess you can peel the apple 
+no | , | Finish my work that would be amazing.
+yes | backpack, | Please open this backpack that I can see its content.
+yes | backpack, | could you put the coffe into that?
+yes | backpack, | Please wrap the backpack I’m pointing to for my flight.
+yes | backpack, | please store the laptop into this backpack
+yes | backpack, | Please hold this object, it’s so heavy.
+yes | backpack, | what's inside that?
+yes | bottle, | Please bring this bottle.
+yes | bottle, | fill that up, please!
+yes | bottle, | Pour some water from this bottle.
+yes | bottle, | I want some water, please bring it to me
+yes | bottle, | Open this bottle.
+yes | bottle, | put this back into the fridge, please
+yes | bottle, | Move this object from table to refrigerator.
+yes | bottle, | clean that bottle!
+yes | bottle, | Bring this one to me.
+yes | bottle, | let's open it up!
+yes | bottle, | Put this bottle into refrigerator.
+yes | bottle, | it's empty, please discard it.
+yes | bowl, | Clean up this bowl.
+yes | bowl, | throw that bowl away, I hate the color!
+yes | bowl, | Put this bowl into the sink. 
+yes | bowl, | fill the salad into this bowl
+yes | bowl, | Please be sure this is empty.
+yes | bowl, | clean that bowl
+yes | bowl, | Please be sure this bowl is clean.
+yes | bowl, | what's inside this?
+yes | bowl, | I need this bowl. It  is in the refrigerator.
+yes | bowl, | put that thing into the dishwasher
+yes | bowl, | Bring me this from dishwasher, please.
+yes | bowl, | please give me that bowl
+yes | bowl, | Put this into the dishwasher, please
+yes | bowl, | open this for me, please
+yes | bowl, | Put this bowl into the refrigerator.
+yes | bowl, | put the food into here, please
+yes | bowl, | I want to eat something from this bowl.
+yes | bowl, | can you move that into the fridge?
+yes | bowl, | Please immediately bring me this.
+yes | bowl, | what about cleaning up that bowl?
+yes | cup, | Please bring me some coffee with this cup.
+yes | cup, | bring this to my boss, please
+yes | cup, | I need a present ASAP, wrap this cup.
+yes | cup, | fill some water in here, please
+yes | cup, | You can attach the pointed object to my collection.
+yes | cup, | could you please put some coffee in here?
+yes | cup, | Serve this cup to our guests please.
+yes | cup, | turn that cup around, please
+yes | cup, | This is ready to be served.
+yes | cup, | this should go to the dishwasher
+yes | cup, | You can drink from this cup.
+yes | cup, | why don't you move that cup to the cupboard?
+yes | cup, | Smell this. I’m not sure if it has been washed.
+yes | cup, | hey robot, can you bring me that cup?
+yes | cup, | Shake this cup but be careful.
+yes | cup, | could you please serve me a coffee inside that one?
+yes | cup, | Pour some coffee into this.
+yes | cup, | please empty that cup
+yes | cup, | I don't want to drink coffee. Please clean up this cup.
+yes | cup, | put that into the backpack
+yes | cup, | I don't want to use this object.
+yes | cup, | fill the water into that cup
+yes | cup, | I urgently need this cup.
+yes | cup, | can a refill of coffee in there?
+yes | cup, | choose a pink cup for me
+yes | cup, | put this mug into the shelf, please
+yes | cup, | please don't shake this 
+yes | cup, | can you serve me some tea inside that cup?
+yes | cup, | use this to bring some water
+yes | cup, | bring that one to Alex, please
+yes | cup, | please empty the water in this
+yes | cup, | that one should go into the dishwasher
+yes | cup, | robot please gather red cups on the table
+yes | cup, | can you clean this cup?
+yes | cup, | please hang this to rack
+yes | cup, | you know that I always want you to move that cup to the cupboard!
+yes | fork, | Use this fork for your task.
+yes | fork, | please clean that fork for me
+yes | fork, | Use that object for your task.
+yes | fork, | would you put that on the dining table for me?
+yes | fork, | please dry this with washcloth
+yes | fork, | just throw it into the sink
+yes | handbag, | I need you to open this handbag.
+yes | handbag, | can you put my purse into that bag?
+yes | handbag, | This has to be opened.
+yes | handbag, | please give me my ID out of that one
+yes | handbag, | can you bring my handbag
+yes | handbag, | what's inside this?
+yes | keyboard, | could you please search for my wireless keyboard
+yes | keyboard, | Please wrap that in a package
+yes | keyboard, | read first letter on the keyboard
+yes | keyboard, | can you switch that on?
+yes | knife, | Sharpen this for me please.
+yes | knife, | please cut the tomatos using that knife
+yes | knife, | This need to be sharpened.
+yes | knife, | bring that to my roommate carefully
+yes | knife, | please collect every knife in the dining room
+yes | knife, | would you please hand me that knife?
+yes | laptop, | could you please pull this a bit front
+yes | laptop, | turn it on
+yes | laptop, | Open this laptop that I can write my paper.
+yes | laptop, | turn that computer off, please
+yes | laptop, | can you hold this for me
+yes | laptop, | can you clean that?
+yes | laptop, | can you set the time in the laptop
+yes | laptop, | please unlock this notebook for me
+yes | laptop, | unlock this using password in the paper
+yes | laptop, | it looks heavy, can you weigh it for me?
+yes | laptop, | Close this laptop, the battery is almost dead.
+yes | laptop, | would you bring this to the other office?
+yes | laptop, | Open this that I can watch a movie.
+yes | laptop, | hey, I would appreciate if you could disassemble this laptop
+yes | microwave, | Check this microwave, it doesn’t work.
+yes | microwave, | cook the pasta using that one
+yes | microwave, | Bring my meal from this.
+yes | microwave, | can you take a look and tell me if it's free?
+yes | microwave, | Open this microwave.
+yes | microwave, | put the pasta from the fridge and put it here
+yes | mouse, | You can use this for the task.
+yes | mouse, | can you measure the size of this?
+yes | plate, | Sorry, but you must wash this plate again.
+yes | plate, | how about you finally take that to the dishwasher instead of doing nothing
+yes | plate, | Sorry, but you have to wash that plate again.
+yes | plate, | please put some food on this plate
+yes | plate, | Move that plate to the cupboard over there.
+yes | plate, | it has a crack, you can discard it
+yes | refrigerator, | Are you able to check this?
+yes | refrigerator, | can you get some joghurt for me, you can find it in there
+yes | refrigerator, | Come and open this refrigerator.
+yes | refrigerator, | please tell me what food I have in there
+yes | refrigerator, | Close this refrigerator.
+yes | refrigerator, | it's heavy, can you help me move that fridge to room 42?
+yes | refrigerator, | Open this.
+yes | refrigerator, | please open that fridge
+yes | scissors, | Use this scissors for the task.
+yes | scissors, | can you give me these scissors?
+yes | scissors, | Sharpen this for me please.
+yes | scissors, | please put this onto my desk
+yes | scissors, | Please put this scissors on the table.
+yes | scissors, | can you clean these scissors for me?
+yes | scissors, | Please bring me this.
+yes | scissors, | use these scissors to cut the green paper
+yes | scissors, | I need this scissors.
+yes | scissors, | can you please move this to the shelf?
+yes | spoon, | put this into the dishwasher, please.
+yes | spoon, | just put it away
+yes | spoon, | Take this spoon and clean up, please.
+yes | spoon, | dear robot, could you please be so kind and clean that dirty spoon up?
+yes | spoon, | Bring me this spoon please, I want to eat something.
+yes | spoon, | why don't you just take it and put it whereever you want
+no | , | I need to drink water, bring me a cup of water
+no | , | give me the book behind you
+no | , | click the mouse for me
+no | , | why don't you bring my food from kitchen
+no | , | Hey I need my cellphone,  bring me this
+no | , | please close the laptop on the desk
+no | , | take this bottle with you
+no | , | can you give me a cup for drinking the water
+no | , | I need you to check this laptop
+no | , | Check the books over there
+no | , | Lets make some coffee together
+no | , | Bring me a spoon
+no | , | Put the bowl to the refrigerator
+no | , | open refrigertor, I need to put this apple
+no | , | I need some hot water, turn on the kettle please
+no | , | inform me when the kettle is ready
+no | , | Grab  one of these glasses
+no | , | you need to wash the remaining glasses
+no | , | I need a knife, can you find me a knife
+no | , | move the knife to the washing machine
+no | , | pour some water to this cup
+no | , | can you please wash the cup
+no | , | move the food to the microwave
+no | , | please gather cups on the table
+no | , | gather plates in the table for me
+no | , | bring yellow plate to me, I need it.
+no | , | Find a bottle of water for me, I am thirsty. 
+no | , | read me the message on the wall
+no | , | Lets make some coffee for me
+no | , | I am little hungry, bring me a snack
+no | , | I am looking for my cell phone, find cell phone for me
+no | , | Bring me the green book
+no | , | let me know when food is ready
+no | , | please clean the table in front of you
+no | , | I am looking for you to turn-on kettle
+no | , | I am waiting you to bring a chair for me
+no | , | My bottle is emtpy, please fill this bottle
+no | , | grab a new bottle of water for me please
+no | , | You should move the bottle near me to the refrigerator
+no | , | Why don't you prepare a salad for me

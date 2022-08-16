@@ -14,7 +14,7 @@
 # limitations under the License.
 """ PyTorch T5 model."""
 
-# source: https://raw.githubusercontent.com/huggingface/transformers/v4.18.0/src/transformers/models/t5/modeling_t5.py
+# based on: https://raw.githubusercontent.com/huggingface/transformers/v4.18.0/src/transformers/models/t5/modeling_t5.py
 
 import copy
 import math
@@ -25,17 +25,19 @@ from typing import Optional, Tuple, Union
 import torch
 from torch import nn
 from torch.nn import CrossEntropyLoss
+
 from torch.utils.checkpoint import checkpoint
 
-from ...activations import ACT2FN
-from ...modeling_outputs import (
+import torch_scatter
+
+from transformers.modeling_outputs import (
     BaseModelOutput,
     BaseModelOutputWithPastAndCrossAttentions,
     Seq2SeqLMOutput,
     Seq2SeqModelOutput,
 )
-from ...modeling_utils import PreTrainedModel, find_pruneable_heads_and_indices, prune_linear_layer
-from ...utils import (
+from transformers.modeling_utils import PreTrainedModel, find_pruneable_heads_and_indices, prune_linear_layer
+from transformers.utils import (
     DUMMY_INPUTS,
     DUMMY_MASK,
     add_start_docstrings,
@@ -44,8 +46,8 @@ from ...utils import (
     logging,
     replace_return_docstrings,
 )
-from ...utils.model_parallel_utils import assert_device_map, get_device_map
-from .configuration_t5 import T5Config
+from transformers.utils.model_parallel_utils import assert_device_map, get_device_map
+from transformers.models.t5.configuration_t5 import T5Config
 
 
 logger = logging.get_logger(__name__)
@@ -526,7 +528,7 @@ class T5Attention(nn.Module):
             # if key and values are already calculated
             # we want only the last query position bias
             if past_key_value is not None:
-                position_bias = position_bias[:, :, -hidden_states.size(1) :, :]
+                position_bias = position_bias[:, :, -hidden_states.size(1):, :]
 
             if mask is not None:
                 position_bias = position_bias + mask  # (batch_size, n_heads, seq_length, key_length)
@@ -732,7 +734,10 @@ class T5Block(nn.Module):
         else:
             outputs = outputs + attention_outputs
 
-        return outputs  # hidden-states, present_key_value_states, (self-attention position bias), (self-attention weights), (cross-attention position bias), (cross-attention weights)
+        # hidden-states, present_key_value_states, (self-attention position bias),
+        # (self-attention weights), (cross-attention position bias),
+        # (cross-attention weights)
+        return outputs
 
 
 class T5PreTrainedModel(PreTrainedModel):
@@ -763,14 +768,16 @@ class T5PreTrainedModel(PreTrainedModel):
         factor = self.config.initializer_factor  # Used for testing weights initialization
         if isinstance(module, T5LayerNorm):
             module.weight.data.fill_(factor * 1.0)
-        elif isinstance(module, (T5Model, T5ForConditionalGeneration, T5EncoderModel)):
+        elif isinstance(module, (T5Model, T5ForConditionalCopying, T5EncoderModel)):
             # Mesh TensorFlow embeddings initialization
-            # See https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/layers.py#L1624
+            # See
+            # https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/layers.py#L1624
             module.shared.weight.data.normal_(mean=0.0, std=factor * 1.0)
         elif isinstance(module, T5DenseReluDense):
             # Mesh TensorFlow FF initialization
             # See https://github.com/tensorflow/mesh/blob/master/mesh_tensorflow/transformer/transformer_layers.py#L56
-            # and https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/layers.py#L89
+            # and
+            # https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/layers.py#L89
             module.wi.weight.data.normal_(mean=0.0, std=factor * ((self.config.d_model) ** -0.5))
             if hasattr(module.wi, "bias") and module.wi.bias is not None:
                 module.wi.bias.data.zero_()
@@ -789,7 +796,8 @@ class T5PreTrainedModel(PreTrainedModel):
                 module.wo.bias.data.zero_()
         elif isinstance(module, T5Attention):
             # Mesh TensorFlow attention initialization to avoid scaling before softmax
-            # See https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/transformer/attention.py#L136
+            # See
+            # https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/transformer/attention.py#L136
             d_model = self.config.d_model
             key_value_proj_dim = self.config.d_kv
             n_heads = self.config.num_heads
@@ -1046,7 +1054,9 @@ class T5Stack(T5PreTrainedModel):
                 )
 
             # layer_outputs is a tuple with:
-            # hidden-states, key-value-states, (self-attention position bias), (self-attention weights), (cross-attention position bias), (cross-attention weights)
+            # hidden-states, key-value-states, (self-attention position bias),
+            # (self-attention weights), (cross-attention position bias),
+            # (cross-attention weights)
             if use_cache is False:
                 layer_outputs = layer_outputs[:1] + (None,) + layer_outputs[1:]
 
@@ -1454,7 +1464,7 @@ class T5Model(T5PreTrainedModel):
 
 
 @add_start_docstrings("""T5 Model with a `language modeling` head on top.""", T5_START_DOCSTRING)
-class T5ForConditionalGeneration(T5PreTrainedModel):
+class T5ForConditionalCopying(T5PreTrainedModel):
     _keys_to_ignore_on_load_missing = [
         r"encoder\.embed_tokens\.weight",
         r"decoder\.embed_tokens\.weight",
@@ -1464,8 +1474,14 @@ class T5ForConditionalGeneration(T5PreTrainedModel):
         r"decoder\.block\.0\.layer\.1\.EncDecAttention\.relative_attention_bias\.weight",
     ]
 
-    def __init__(self, config: T5Config):
+    def __init__(self, config: T5Config, **kwargs):
         super().__init__(config)
+
+        print('T5ForConditionalCopying init')
+
+        self.mode = kwargs['mode'] if 'mode' in kwargs else None
+        self.tokenizer_len = config.vocab_size
+
         self.model_dim = config.d_model
 
         self.shared = nn.Embedding(config.vocab_size, config.d_model)
@@ -1555,6 +1571,7 @@ class T5ForConditionalGeneration(T5PreTrainedModel):
         output_attentions: Optional[bool] = None,
         output_hidden_states: Optional[bool] = None,
         return_dict: Optional[bool] = None,
+        **kwargs,
     ) -> Union[Tuple[torch.FloatTensor], Seq2SeqLMOutput]:
         r"""
         labels (`torch.LongTensor` of shape `(batch_size,)`, *optional*):
@@ -1661,24 +1678,34 @@ class T5ForConditionalGeneration(T5PreTrainedModel):
 
         if self.config.tie_word_embeddings:
             # Rescale output before projecting on vocab
-            # See https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/transformer/transformer.py#L586
+            # See
+            # https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/transformer/transformer.py#L586
             sequence_output = sequence_output * (self.model_dim**-0.5)
 
-        lm_logits = self.lm_head(sequence_output)
+        if self.mode == 'generate':
+            logits = self.compute_logits(input_ids, encoder_outputs, sequence_output, kwargs)
+        else:
+            logits_copy = self.compute_logits_copy(input_ids, encoder_outputs, sequence_output, kwargs)
 
         loss = None
-        if labels is not None:
-            loss_fct = CrossEntropyLoss(ignore_index=-100)
-            loss = loss_fct(lm_logits.view(-1, lm_logits.size(-1)), labels.view(-1))
-            # TODO(thom): Add z_loss https://github.com/tensorflow/mesh/blob/fa19d69eafc9a482aff0b59ddd96b025c0cb207d/mesh_tensorflow/layers.py#L666
+        if self.mode == 'generate' and labels is not None:
+            loss = self.compute_generate_loss(labels, logits)
+        elif self.mode == 'copy' and 'copy_target' in kwargs and kwargs['copy_target'] is not None:
+            loss = self.compute_copy_loss(kwargs['copy_target'], logits_copy)
+
+        if self.mode == 'copy':
+            if self.is_test:
+                logits = self.adapt_logits_to_vocab(logits_copy, input_ids, sequence_output, kwargs)
+            else:
+                logits = None
 
         if not return_dict:
-            output = (lm_logits,) + decoder_outputs[1:] + encoder_outputs
+            output = (logits,) + decoder_outputs[1:] + encoder_outputs
             return ((loss,) + output) if loss is not None else output
 
         return Seq2SeqLMOutput(
             loss=loss,
-            logits=lm_logits,
+            logits=logits,
             past_key_values=decoder_outputs.past_key_values,
             decoder_hidden_states=decoder_outputs.hidden_states,
             decoder_attentions=decoder_outputs.attentions,
@@ -1687,6 +1714,47 @@ class T5ForConditionalGeneration(T5PreTrainedModel):
             encoder_hidden_states=encoder_outputs.hidden_states,
             encoder_attentions=encoder_outputs.attentions,
         )
+
+    def compute_logits(self, input_ids, encoder_outputs, sequence_output, kwargs):
+        logits = self.lm_head(sequence_output)
+        return logits
+
+    def compute_logits_copy(self, input_ids, encoder_outputs, sequence_output, kwargs):
+        input_indices = input_ids.unsqueeze(1) if input_ids is not None else kwargs['source_ids'].unsqueeze(1)
+
+        attentions = torch.bmm(sequence_output, encoder_outputs.last_hidden_state.transpose(1, 2))
+        logits = attentions.masked_fill_(input_indices.eq(0), -float('inf'))
+
+        return logits
+
+    def compute_generate_loss(self, labels, logits):
+        loss_fct = CrossEntropyLoss(ignore_index=-100)
+        generate_labels = labels.masked_fill(labels.eq(0), -100)
+        return loss_fct(logits.view(-1, logits.size(-1)), generate_labels.view(-1))
+
+    def compute_copy_loss(self, labels, logits):
+        loss_fct = CrossEntropyLoss(ignore_index=-100)
+
+        if any(labels.view(-1).gt(logits.size(-1))):
+            breakpoint()
+
+        if logits.view(-1, logits.size(-1)).size(0) != labels.view(-1).size(0):
+            breakpoint()
+
+        return loss_fct(logits.view(-1, logits.size(-1)), labels.view(-1))
+
+    def adapt_logits_to_vocab(self, logits, input_ids, sequence_output, kwargs):
+        adapted_logits = torch.full((sequence_output.size(0), sequence_output.size(1),
+                                     self.tokenizer_len), -float('inf'))
+        adapted_logits = adapted_logits.to(device=self.device)
+
+        input_indices = input_ids.unsqueeze(1) if input_ids is not None else kwargs['source_ids'].unsqueeze(1)
+
+        expanded_input_indices = input_indices.expand(-1, adapted_logits.size(1), -1)
+        torch.ops.torch_scatter.scatter_max(logits, expanded_input_indices, -1, adapted_logits, None)
+        # torch_scatter.scatter_max(logits, expanded_input_indices, out=adapted_logits)
+
+        return adapted_logits
 
     def prepare_inputs_for_generation(
         self,
@@ -1714,6 +1782,7 @@ class T5ForConditionalGeneration(T5PreTrainedModel):
             "decoder_head_mask": decoder_head_mask,
             "cross_attn_head_mask": cross_attn_head_mask,
             "use_cache": use_cache,
+            "source_ids": kwargs['source_ids'] if 'source_ids' in kwargs else None,
         }
 
     def prepare_decoder_input_ids_from_labels(self, labels: torch.Tensor):
