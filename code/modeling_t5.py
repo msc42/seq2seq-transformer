@@ -1691,6 +1691,12 @@ class T5ForConditionalCopying(T5PreTrainedModel):
         if self.mode == 'generate' and labels is not None:
             loss = self.compute_generate_loss(labels, logits)
         elif self.mode == 'copy' and 'copy_target' in kwargs and kwargs['copy_target'] is not None:
+            if any(kwargs['copy_target'].view(-1).gt(logits_copy.size(-1))):
+                breakpoint()
+
+            if logits_copy.view(-1, logits_copy.size(-1)).size(0) != kwargs['copy_target'].view(-1).size(0):
+                breakpoint()
+
             loss = self.compute_copy_loss(kwargs['copy_target'], logits_copy)
 
         if self.mode == 'copy':

@@ -285,10 +285,11 @@ def main(args: argparse.Namespace) -> None:
     trainer = Trainer.from_argparse_args(args, callbacks=callbacks)
 
     if args.max_epochs > 0:
-        trainer.fit(model, data_model)
+        trainer.fit(model, data_model, ckpt_path=args.checkpoint_path)
 
     if args.predictions_file:
-        trainer.test(model=model if args.max_epochs == 0 else None, datamodule=data_model)
+        trainer.test(model=model if args.max_epochs == 0 else None,
+                     datamodule=data_model, ckpt_path=args.checkpoint_path)
 
 
 if __name__ == '__main__':
@@ -298,6 +299,8 @@ if __name__ == '__main__':
                         help='path where the output is saved')
     parser.add_argument('data_path', type=str,
                         help='path where training and evaluation data is saved')
+    parser.add_argument('--checkpoint_path', type=str, default=None,
+                        help='path where checkpoint is saved')
     parser.add_argument('--do_train', action='store_true',
                         help='do training')
     parser.add_argument('--predictions_file', type=str, default='',
