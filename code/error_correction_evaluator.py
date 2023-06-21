@@ -21,13 +21,13 @@ class Mode(str, Enum):
         return self.value
 
 
-def calculate_results(ref_file_path, hyp_file_path, mode, add_number_wrong_before, source_file_path='',
-                      case_sensitiv=True, remove_from_source_line='', add_to_source_line=''):
-    case_sensitiv = True
-    total = add_number_wrong_before
-    errors = add_number_wrong_before
-    errors_correction = add_number_wrong_before
-    errors_extraction = add_number_wrong_before
+def calculate_results(ref_file_path, hyp_file_path, mode, add_number_classification_false_negatives,
+                      add_number_classification_true_negatives, source_file_path='',
+                      case_insensitiv=False, remove_from_source_line='', add_to_source_line='', ignore_spaces=False):
+    total = add_number_classification_false_negatives + add_number_classification_true_negatives
+    errors = add_number_classification_false_negatives
+    errors_correction = add_number_classification_false_negatives
+    errors_extraction = add_number_classification_false_negatives
 
     tokenizer = T5Tokenizer.from_pretrained('t5-large')
 
@@ -47,7 +47,7 @@ def calculate_results(ref_file_path, hyp_file_path, mode, add_number_wrong_befor
             if src_line is not None:
                 src_line = src_line.strip()
 
-            if not case_sensitiv:
+            if case_insensitiv:
                 ref_line = ref_line.lower()
                 hyp_line = hyp_line.lower()
                 if src_line is not None:
@@ -69,17 +69,29 @@ def calculate_results(ref_file_path, hyp_file_path, mode, add_number_wrong_befor
             hyp_correction = hyp_splitted[0].strip()
             hyp_extraction = hyp_splitted[1].strip() if len(hyp_splitted) > 1 else ''
 
+            if ignore_spaces:
+                ref_correction = ref_correction.replace(' ', '')
+                hyp_correction = hyp_correction.replace(' ', '')
+
             if ref_correction != hyp_correction:
                 errors_correction += 1
                 error = True
 
             ref_extraction_splitted = ref_extraction.split(' - ')
-            ref_extraction_1 = ref_extraction_splitted[0].strip()
-            ref_extraction_2 = ref_extraction_splitted[1].strip() if len(ref_extraction_splitted) > 1 else ''
+            ref_extraction_1 = ref_extraction_splitted[0].strip().replace(' ', '')
+            ref_extraction_2 = ref_extraction_splitted[1].strip().replace(
+                ' ', '') if len(ref_extraction_splitted) > 1 else ''
 
             hyp_extraction_splitted = hyp_extraction.split(' - ')
-            hyp_extraction_1 = hyp_extraction_splitted[0].strip()
-            hyp_extraction_2 = hyp_extraction_splitted[1].strip() if len(hyp_extraction_splitted) > 1 else ''
+            hyp_extraction_1 = hyp_extraction_splitted[0].strip().replace(' ', '')
+            hyp_extraction_2 = hyp_extraction_splitted[1].strip().replace(
+                ' ', '') if len(hyp_extraction_splitted) > 1 else ''
+
+            if ignore_spaces:
+                ref_extraction_1 = ref_extraction_1.replace(' ', '')
+                ref_extraction_2 = ref_extraction_2.replace(' ', '')
+                hyp_extraction_1 = hyp_extraction_1.replace(' ', '')
+                hyp_extraction_2 = hyp_extraction_2.replace(' ', '')
 
             if re.fullmatch('(.*) -> \\1', hyp_extraction_1):
                 hyp_extraction_1 = ''
@@ -120,8 +132,12 @@ if __name__ == '__main__':
 
     parser.add_argument('--mode', type=Mode, default=Mode.STAT, choices=tuple(Mode))
     parser.add_argument('--source_file', type=str, default='')
-    parser.add_argument('--add_number_wrong_before', type=int, default=0, help='for pipeline approach')
-    parser.add_argument('--case_sensitive', action='store_true')
+    parser.add_argument('--add_number_classification_false_negatives',
+                        type=int, default=0, help='for pipeline approach')
+    parser.add_argument('--add_number_classification_true_negatives',
+                        type=int, default=0, help='for pipeline approach')
+    parser.add_argument('--case_insensitive', action='store_true')
+    parser.add_argument('--ignore_spaces', action='store_true')
     parser.add_argument('--remove_from_source_line', type=str, default='',
                         help='only for classification mode, remove from end of source line, execute before add to source line')
     parser.add_argument('--add_to_source_line', type=str, default='',
@@ -130,10 +146,12 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     results = calculate_results(args.ref_file, args.hyp_file, args.mode,
-                                args.add_number_wrong_before, source_file_path=args.source_file,
-                                case_sensitiv=args.case_sensitive,
+                                args.add_number_classification_false_negatives,
+                                args.add_number_classification_true_negatives,
+                                source_file_path=args.source_file,
+                                case_insensitiv=args.case_insensitive,
                                 remove_from_source_line=args.remove_from_source_line,
-                                add_to_source_line=args.add_to_source_line)
+                                add_to_source_line=args.add_to_source_line, ignore_spaces=args.ignore_spaces)
 
     if args.mode == Mode.STAT:
         print(results)

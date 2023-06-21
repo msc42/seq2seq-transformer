@@ -26,6 +26,9 @@ def calculate_results(ref_file_path, hyp_file_path, mode, output_file_path):
     total = 0
     errors = 0
 
+    fn=0
+    tn=0
+
     with open(ref_file_path, 'r') as ref_file, \
             open(hyp_file_path, 'r') as hyp_file, \
             ExitStack() as stack:
@@ -49,13 +52,20 @@ def calculate_results(ref_file_path, hyp_file_path, mode, output_file_path):
             if ref != hyp:
                 errors += 1
 
+                if ref == label_to_int['I']:
+                    fn += 1
+
                 if mode == Mode.ERROR:
                     print(source)
             else:
+                if ref == label_to_int['O']:
+                    tn += 1
+
                 if mode == Mode.CORRECT:
                     print(source)
-                elif mode == Mode.EXPORT_CORRECT_CORRECTIONS and ref == label_to_int['I']:
-                    output_file.write(f'{i}\n')
+
+            if mode == Mode.EXPORT_CORRECT_CORRECTIONS and hyp == label_to_int['I']:
+                output_file.write(f'{i}\n')
 
             total += 1
 
@@ -73,7 +83,7 @@ def calculate_results(ref_file_path, hyp_file_path, mode, output_file_path):
                         if precision_no_correction + recall_no_correction != 0
                         else 0)
 
-    return acc, precision_correction, recall_correction, f1_correction, precision_no_correction, recall_no_correction, f1_no_correction
+    return acc, precision_correction, recall_correction, f1_correction, precision_no_correction, recall_no_correction, f1_no_correction, fn, tn
 
 
 def get_latex_str(results):
